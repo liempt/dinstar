@@ -15,5 +15,4 @@ public class BaseResult {
 		this.jsonValueString = jsonString;
 	}
 	
-	
 }

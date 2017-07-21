@@ -16,10 +16,12 @@ import org.apache.commons.codec.binary.Base64;
 public class HttpUtil {
 
 	public static final String credentials = "admin:admin";
-	public static final String basicAuth = "Basic " + new String(new Base64().encode(credentials.getBytes()));
+//	public static final String basicAuth = "Basic " + new String(new Base64().encode(credentials.getBytes()));
 
 	public static String sendPostRequest(String strUrl, String jsonParams) {
 		try {
+			byte[] authEncBytes = Base64.encodeBase64(credentials.getBytes());
+			String basicAuth = new String(authEncBytes);
 			URL e = new URL(strUrl);
 			System.out.println("url => " + strUrl);
 			System.out.println("jsonparams => " + jsonParams);
@@ -32,8 +34,9 @@ public class HttpUtil {
 			httpConnection.setRequestMethod("POST");
 			httpConnection.setRequestProperty("Accept", "application/json");
 			httpConnection.setRequestProperty("Content-Type", "application/json");
-			httpConnection.setRequestProperty("Authorization", basicAuth);
+			httpConnection.setRequestProperty("Authorization", "Basic " + basicAuth);
 			httpConnection.connect();
+			System.out.println("props " +httpConnection.getRequestProperty("Authorization"));
 
 			OutputStreamWriter os = new OutputStreamWriter(
 					httpConnection.getOutputStream(), "UTF-8");
@@ -79,18 +82,19 @@ public class HttpUtil {
 
 	public static String sendGetRequest(String strUrl, String param) {
 		try {
+			byte[] authEncBytes = Base64.encodeBase64(credentials.getBytes());
+			String basicAuth = new String(authEncBytes);
 			strUrl = strUrl + "?" + URLEncoder.encode(param, "UTF-8");
 			URL e = new URL(strUrl);
 			System.out.println("url => " + strUrl);
 			System.out.println("param => " +param);
-			
 			HttpURLConnection httpConnection = (HttpURLConnection) e.openConnection();
 			httpConnection.setDoInput(true);
 			httpConnection.setUseCaches(false);
 			httpConnection.setRequestMethod("GET");
 			httpConnection.setRequestProperty("Accept", "application/json");
 			httpConnection.setRequestProperty("Content-Type", "application/json");
-			httpConnection.setRequestProperty("Authorization", basicAuth);
+			httpConnection.setRequestProperty("Authorization", "Basic " + basicAuth);
 			httpConnection.connect();
 			if (httpConnection.getResponseCode() != 200) {
 				Map is1 = httpConnection.getHeaderFields();

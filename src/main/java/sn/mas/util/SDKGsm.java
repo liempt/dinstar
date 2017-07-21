@@ -6,8 +6,8 @@ import sn.mas.sms.Gateway;
 
 public class SDKGsm {
 	
-	public static final String host = "127.0.0.1";
-	//public static final String host = "10.7.0.30";
+	//public static final String host = "127.0.0.1";
+	public static final String host = "10.7.0.30";
 	
 	public static final int port = 80;
 	public static final String authUser = "admin";

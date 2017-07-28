@@ -11,8 +11,8 @@ public class App
 {
     public static void main( String[] args ) throws InterruptedException
     {
-         String text = "#116*1*783882740*100*0000#";
-//        String text = "#177*769030305*0000*100#";
+        String text = "#116*1*772996838*100*0000#";
+//    	String text = "#177*769030305*0000*100#";
         int[] ports = { 1 };
         try {
 			SDKGsm.createSendUSSD(text, ports, "send");

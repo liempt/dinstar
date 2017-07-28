@@ -59,11 +59,13 @@ public class Gateway {
 				return null;
 			} else {
 				JSONObject resultObj = new JSONObject(result);
+				System.out.println("resultObj => " + resultObj);
 				SendUSSDResult sendUSSDResult = new SendUSSDResult();
-				List<SendUSSDResultItem> resultList = new ArrayList<SendUSSDResultItem>();
+				ArrayList resultList = new ArrayList();
+				// List<SendUSSDResultItem> resultList = new ArrayList<SendUSSDResultItem>();
 
 				sendUSSDResult.setJsonString(result);
-				sendUSSDResult.setErrorCode(resultObj.getInt("result"));
+				sendUSSDResult.setErrorCode(resultObj.getInt("error_code"));
 				sendUSSDResult.setResult(resultList);
 
 				if (resultObj.has("result")) {
